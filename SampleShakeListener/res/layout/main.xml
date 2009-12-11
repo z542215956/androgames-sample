@@ -9,7 +9,7 @@
 		android:layout_height="wrap_content"
 		android:stretchColumns="0|1">
 	
-		<TableRow android:weightSum="2">
+		<TableRow>
 		
 			<TextView
 				android:text="X :"
@@ -25,7 +25,7 @@
 		
 		</TableRow>
 	
-		<TableRow android:weightSum="2">
+		<TableRow>
 		
 			<TextView
 				android:text="Y :"
@@ -41,7 +41,7 @@
 		
 		</TableRow>
 	
-		<TableRow android:weightSum="2">
+		<TableRow>
 		
 			<TextView
 				android:text="Z :"
@@ -57,7 +57,7 @@
 		
 		</TableRow>
 	
-		<TableRow android:weightSum="2">
+		<TableRow>
 		
 			<TextView
 				android:text="aX :"
@@ -73,7 +73,7 @@
 		
 		</TableRow>
 	
-		<TableRow android:weightSum="2">
+		<TableRow>
 		
 			<TextView
 				android:text="aY :"
@@ -89,7 +89,7 @@
 		
 		</TableRow>
 	
-		<TableRow android:weightSum="2">
+		<TableRow>
 		
 			<TextView
 				android:text="aZ"
