@@ -54,14 +54,14 @@ public class SensorListener extends Activity implements SensorEventListener {
 		synchronized (this) {
         	switch (event.sensor.getType()) {
 	        	case SensorManager.SENSOR_ORIENTATION :
-	        		x.setText(String.valueOf(event.values[0]));
-	        		y.setText(String.valueOf(event.values[1]));
-	        		z.setText(String.valueOf(event.values[2]));
+	        		x.setText(String.valueOf(event.values[SensorManager.DATA_X]));
+	        		y.setText(String.valueOf(event.values[SensorManager.DATA_Y]));
+	        		z.setText(String.valueOf(event.values[SensorManager.DATA_Z]));
 	        		break;
 	        	case SensorManager.SENSOR_ACCELEROMETER :
-	        		ax.setText(String.valueOf(event.values[0]));
-	        		ay.setText(String.valueOf(event.values[1]));
-	        		az.setText(String.valueOf(event.values[2]));
+	        		ax.setText(String.valueOf(event.values[SensorManager.DATA_X]));
+	        		ay.setText(String.valueOf(event.values[SensorManager.DATA_Y]));
+	        		az.setText(String.valueOf(event.values[SensorManager.DATA_Z]));
 	        		break;
         	}           
         }
