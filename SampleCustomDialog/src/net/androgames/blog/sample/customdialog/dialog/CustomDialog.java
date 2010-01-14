@@ -25,6 +25,10 @@ import android.widget.TextView;
  */
 public class CustomDialog extends Dialog {
 
+	public CustomDialog(Context context, int theme) {
+		super(context, theme);
+	}
+
 	public CustomDialog(Context context) {
 		super(context);
 	}
@@ -134,7 +138,7 @@ public class CustomDialog extends Dialog {
 		public CustomDialog create() {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			final CustomDialog dialog = new CustomDialog(context);
+			final CustomDialog dialog = new CustomDialog(context, R.style.Dialog);
 			View layout = inflater.inflate(R.layout.dialog, null);
 			dialog.addContentView(layout, new LayoutParams(
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));

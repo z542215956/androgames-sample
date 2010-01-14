@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 /**
  * 
@@ -28,6 +30,16 @@ public class CustomDialogActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        findViewById(R.id.customDialog).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				CustomDialogActivity.this.showDialog(CUSTOM_DIALOG);
+			}
+		});
+        findViewById(R.id.defaultDialog).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				CustomDialogActivity.this.showDialog(DEFAULT_DIALOG);
+			}
+		});
     }
     
     /**
@@ -65,13 +77,13 @@ public class CustomDialogActivity extends Activity {
 					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							CustomDialogActivity.this
-							.dismissDialog(CUSTOM_DIALOG);
+							.dismissDialog(DEFAULT_DIALOG);
 						}
 					})
 					.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							CustomDialogActivity.this
-							.dismissDialog(CUSTOM_DIALOG);
+							.dismissDialog(DEFAULT_DIALOG);
 						}
 					});
 	            dialog = alertBuilder.create();
