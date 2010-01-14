@@ -1,7 +1,7 @@
 package net.androgames.blog.sample.livewallpaper;
 
-import android.app.Activity;
+import android.preference.PreferenceActivity;
 
-public class LiveWallpaperSettings extends Activity {
+public class LiveWallpaperSettings extends PreferenceActivity {
 
 }
