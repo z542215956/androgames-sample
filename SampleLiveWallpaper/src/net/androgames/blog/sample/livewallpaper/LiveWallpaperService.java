@@ -6,8 +6,9 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 public class LiveWallpaperService extends WallpaperService {
-	
-	public static final String PREFERENCE_SPEED = "PREFERENCE_SPEED";
+
+	public static final String PREFERENCES = "net.androgames.blog.sample.livewallpaper";
+	public static final String PREFERENCE_RADIUS = "preference_radius";
 
 	@Override
 	public Engine onCreateEngine() {
@@ -31,12 +32,15 @@ public class LiveWallpaperService extends WallpaperService {
 		
 		SampleEngine() {
 			SurfaceHolder holder = getSurfaceHolder();
-	        painting = new LiveWallpaperPainting(holder, getApplicationContext());
-	        prefs = LiveWallpaperService.this.getSharedPreferences(PREFERENCE_SPEED, 0);
+	        prefs = LiveWallpaperService.this.getSharedPreferences(PREFERENCES, 0);
 	        prefs.registerOnSharedPreferenceChangeListener(this);
+	        painting = new LiveWallpaperPainting(holder, getApplicationContext(), 
+	        		Integer.parseInt(prefs.getString(PREFERENCE_RADIUS, "10")));
 		}
 
-		public void onSharedPreferenceChanged(SharedPreferences arg0, String arg1) {}
+		public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+			painting.setRadius(Integer.parseInt(prefs.getString(PREFERENCE_RADIUS, "10")));
+		}
 
         @Override
         public void onCreate(SurfaceHolder surfaceHolder) {
