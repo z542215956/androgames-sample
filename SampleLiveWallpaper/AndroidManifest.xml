@@ -4,21 +4,17 @@
 	package="net.androgames.blog.sample.livewallpaper"
 	android:versionCode="1"
 	android:versionName="1.0">
-    <application 
-    	android:icon="@drawable/icon" 
-    	android:label="@string/app_name">
+	<application 
+		android:icon="@drawable/icon" 
+		android:label="@string/app_name">
 		<service 
 			android:name="LiveWallpaperService"
 			android:enabled="true"
 			android:icon="@drawable/icon"
 			android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER">
-			<intent-filter 
-				android:icon="@drawable/icon"
-				android:label="@string/app_name"
-				android:priority="1" >
-			    <action 
-			    	android:name="android.service.wallpaper.WallpaperService" />
+			android:permission="android.permission.BIND_WALLPAPER">
+			<intent-filter android:priority="1" >
+				<action android:name="android.service.wallpaper.WallpaperService" />
 			</intent-filter>
 			<meta-data 
 				android:name="android.service.wallpaper" 
@@ -29,6 +25,6 @@
 			android:name=".LiveWallpaperSettings" 
 			android:theme="@android:style/Theme.Light.WallpaperSettings"
 			android:exported="true" />
-    </application>
-    <uses-sdk android:minSdkVersion="7" />
+	</application>
+	<uses-sdk android:minSdkVersion="7" />
 </manifest> 
