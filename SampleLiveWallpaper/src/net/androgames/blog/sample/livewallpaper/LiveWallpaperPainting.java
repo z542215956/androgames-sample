@@ -9,6 +9,20 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+/**
+ * 
+ * A sample class that handle the painting of an Android LiveWallpaper 
+ * in a proper manner, without consumming resources when there is no need 
+ * to modifiy the wallpaper appearence :
+ * - when the wallpaper is hidden (no more visible)
+ * - when there is nothing to update / animate
+ * 
+ * Sample from <a href="http://blog.androgames.net">Androgames tutorials blog</a>
+ * Under GPL v3 : http://www.gnu.org/licenses/gpl-3.0.html
+ * 
+ * @author antoine vianey
+ *
+ */
 public class LiveWallpaperPainting extends Thread {
 
     /** Reference to the View and the context */
