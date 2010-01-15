@@ -5,6 +5,17 @@ import android.service.wallpaper.WallpaperService;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+/**
+ * 
+ * A sample class that defines a LiveWallpaper an it's associated Engine.
+ * The Engine delegates all the Wallpaper painting stuff to a specialized Thread.
+ * 
+ * Sample from <a href="http://blog.androgames.net">Androgames tutorials blog</a>
+ * Under GPL v3 : http://www.gnu.org/licenses/gpl-3.0.html
+ * 
+ * @author antoine vianey
+ *
+ */
 public class LiveWallpaperService extends WallpaperService {
 
 	public static final String PREFERENCES = "net.androgames.blog.sample.livewallpaper";
