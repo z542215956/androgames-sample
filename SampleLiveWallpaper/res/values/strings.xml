@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World!</string>
-    <string name="app_name">SampleLiveWallpaper</string>
+    <string name="app_name">LiveWallpaper tutorial</string>
+    <string name="settings_title">SampleLiveWallpaper settings</string>
+    <string name="description">Sample LiveWallpaper from the androgames.net blog</string>
+    <string name="preference_radius_title">Configure radius</string>
+    <string name="preference_radius_summary">Touch tracking radius and duration</string>
 </resources>
