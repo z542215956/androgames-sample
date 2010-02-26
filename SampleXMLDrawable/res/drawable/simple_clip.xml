@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 
 
-	<declare-styleable name="BitmapDrawable">
-        <attr name="src" />
-        <attr name="antialias" format="boolean" />
-        <attr name="filter" format="boolean" />
-        <attr name="dither" />
-        <attr name="gravity" />
-        <attr name="tileMode">
-            <enum name="disabled" value="-1" />
-            <enum name="clamp" value="0" />
-            <enum name="repeat" value="1" />
-            <enum name="mirror" value="2" />
+	<declare-styleable name="ClipDrawable">
+        <attr name="clipOrientation">
+            <flag name="horizontal" value="1" />
+            <flag name="vertical" value="2" />
         </attr>
+        <attr name="gravity" />
+        <attr name="drawable" />
     </declare-styleable>
 
  -->
-<bitmap
+<clip
 	xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@drawable/bg"
-    android:tileMode="repeat" />
+    android:drawable="@drawable/bg"
+    android:clipOrientation="horizontal"
+    android:gravity="top" />

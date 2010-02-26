@@ -16,6 +16,8 @@
         <attr name="centerY" format="float|fraction" />
         <attr name="gradientRadius" format="float|fraction" />
     </declare-styleable>
+    
+    tester de mettre plusieurs gradients
 
  -->
 <shape 

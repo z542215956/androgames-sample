@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Definition of a simple oval shape -->
-<!-- ********************************* 
-	  shape : oval
-	 		  line
-	 		  ring
-	 		  rectangle
-	    top : top padding
-	 bottom : bottom padding
-	   left : left padding
-	  right : right padding
-	  color : fill color
-	 height : height of the shape
-	  width : width of the shape
-	 ********************************* -->
 <!-- 
-
-    <declare-styleable name="GradientDrawable">
+	gradient
+	solid
+	corner
+	padding
+	scale
+	
+	
+	<declare-styleable name="GradientDrawable">
         <attr name="visible" />
         <attr name="shape">
             <enum name="rectangle" value="0" />
@@ -23,29 +15,91 @@
             <enum name="line" value="2" />
             <enum name="ring" value="3" />
         </attr>
-        Inner radius of the ring expressed as a ratio of the ring's width. For instance,
-        if innerRadiusRatio=9, then the inner radius equals the ring's width divided by 9.
-        This value is ignored if innerRadius is defined. Default value is 9.
         <attr name="innerRadiusRatio" format="float" />
-        Thickness of the ring expressed as a ratio of the ring's width. For instance,
-        if thicknessRatio=3, then the thickness equals the ring's width divided by 3.
-        This value is ignored if innerRadius is defined. Default value is 3.
         <attr name="thicknessRatio" format="float" />
-        Inner radius of the ring. When defined, innerRadiusRatio is ignored.
         <attr name="innerRadius" format="dimension" />
-        Thickness of the ring. When defined, thicknessRatio is ignored.
         <attr name="thickness" format="dimension" />
         <attr name="useLevel" />
     </declare-styleable>
 
+    <declare-styleable name="GradientDrawableSize">
+        <attr name="width" />
+        <attr name="height" />
+    </declare-styleable>
+
+    <declare-styleable name="GradientDrawableGradient">
+        <attr name="startColor" format="color" />
+        <attr name="centerColor" format="color" />
+        <attr name="endColor" format="color" />
+        <attr name="useLevel" format="boolean" />
+        <attr name="angle" format="float" />
+        <attr name="type">
+            <enum name="linear" value="0" />
+            <enum name="radial" value="1" />
+            <enum name="sweep"  value="2" />
+        </attr>
+        <attr name="centerX" format="float|fraction" />
+        <attr name="centerY" format="float|fraction" />
+        <attr name="gradientRadius" format="float|fraction" />
+    </declare-styleable>
+
+    <declare-styleable name="GradientDrawableSolid">
+        <attr name="color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="GradientDrawableStroke">
+        <attr name="width" />
+        <attr name="color" />
+        <attr name="dashWidth" format="dimension" />
+        <attr name="dashGap" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DrawableCorners">
+        <attr name="radius" format="dimension" />
+        <attr name="topLeftRadius" format="dimension" />
+        <attr name="topRightRadius" format="dimension" />
+        <attr name="bottomLeftRadius" format="dimension" />
+        <attr name="bottomRightRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="GradientDrawablePadding">
+        <attr name="left" format="dimension" />
+        <attr name="top" format="dimension" />
+        <attr name="right" format="dimension" />
+        <attr name="bottom" format="dimension" />
+    </declare-styleable>
+
  -->
+
+
 <shape 
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:shape="oval"
-	android:top="10dip"
-	android:right="10dip"
-	android:left="10dip"
-	android:bottom="10dip"
-	android:color="#FFFF0000"
-	android:height="50dip"
-	android:width="50dip" />
+	android:shape="rectangle">
+	<solid
+		android:color="@color/blue" />
+	<gradient 
+		android:startColor="@color/red"
+		android:endColor="@color/green"
+		android:centerColor="@color/yellow"
+		android:centerX="33%"
+		android:centerY="33%"
+		android:angle="45" />
+	<stroke
+		android:width="2dip"
+		android:color="@color/white"
+		android:dashWidth="5dip"
+		android:dashGap="2dip" />
+	<corners 
+		android:bottomRightRadius="5dip" 
+		android:bottomLeftRadius="5dip" 
+		android:topLeftRadius="5dip" 
+		android:topRightRadius="5dip" />
+    <padding 
+    	android:left="5dip" 
+    	android:top="5dip" 
+    	android:right="5dip" 
+    	android:bottom="5dip" /> 
+    <size
+    	android:height="20dip"
+    	android:width="40dip"/>
+</shape>

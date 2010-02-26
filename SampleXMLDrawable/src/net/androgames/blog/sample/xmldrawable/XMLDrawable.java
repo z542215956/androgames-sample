@@ -12,6 +12,18 @@ public class XMLDrawable extends Activity {
     }
 }
 
+/**
+ * 
+ * 1 - shapes
+ * 		a. simple forms
+ * 		b. complex forms
+ * 		c. 
+ * 2 - bitmaps
+ * 
+ * 3 - layers
+ * 
+ */
+
 /*
 <rotate> 
 android:drawable 		Reference to a drawable resource to use for the frame. 
