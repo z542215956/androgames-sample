@@ -44,7 +44,7 @@ public class Accelerometer extends Activity implements AccelerometerListener {
 
 	@Override
 	public void onShake(float force) {
-		Toast.makeText(this, "Phone shaked : " + force, 1000);
+		Toast.makeText(this, "Phone shaked : " + force, 1000).show();
 	}
 
 	@Override
