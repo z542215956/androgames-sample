@@ -42,12 +42,16 @@ public class Accelerometer extends Activity implements AccelerometerListener {
 		return CONTEXT;
 	}
 
-	@Override
+    /**
+     * onShake callback
+     */
 	public void onShake(float force) {
 		Toast.makeText(this, "Phone shaked : " + force, 1000).show();
 	}
 
-	@Override
+	/**
+	 * onAccelerationChanged callback
+	 */
 	public void onAccelerationChanged(float x, float y, float z) {
 		((TextView) findViewById(R.id.x)).setText(String.valueOf(x));
 		((TextView) findViewById(R.id.y)).setText(String.valueOf(y));
