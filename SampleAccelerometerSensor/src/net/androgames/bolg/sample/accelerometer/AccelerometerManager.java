@@ -70,7 +70,7 @@ public class AccelerometerManager {
 	/**
 	 * Configure the listener for shaking
 	 * @param threshold
-	 * 			minimum acceleration for considering shaking
+	 * 			minimum acceleration variation for considering shaking
 	 * @param interval
 	 * 			minimum interval between to shake events
 	 */
@@ -104,7 +104,7 @@ public class AccelerometerManager {
 	 * @param shakeListener
 	 * 			callback for accelerometer events
 	 * @param threshold
-	 * 			minimum acceleration for considering shaking
+	 * 			minimum acceleration variation for considering shaking
 	 * @param interval
 	 * 			minimum interval between to shake events
 	 */
