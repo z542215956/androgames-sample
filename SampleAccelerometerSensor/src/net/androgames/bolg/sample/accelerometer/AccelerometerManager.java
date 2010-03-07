@@ -81,10 +81,11 @@ public class AccelerometerManager {
 
 	/**
 	 * Registers a listener and start listening
-	 * @param shakeListener
+	 * @param accelerometerListener
 	 * 			callback for accelerometer events
 	 */
-	public static void startListening(AccelerometerListener shakeListener) {
+	public static void startListening(
+			AccelerometerListener accelerometerListener) {
 		sensorManager = (SensorManager) Accelerometer.getContext().
 				getSystemService(Context.SENSOR_SERVICE);
 		List<Sensor> sensors = sensorManager.getSensorList(
@@ -94,30 +95,32 @@ public class AccelerometerManager {
 			running = sensorManager.registerListener(
 					sensorEventListener, sensor, 
 					SensorManager.SENSOR_DELAY_GAME);
-			listener = shakeListener;
+			listener = accelerometerListener;
 		}
 	}
 	
 	/**
 	 * Configures threshold and interval
 	 * And registers a listener and start listening
-	 * @param shakeListener
+	 * @param accelerometerListener
 	 * 			callback for accelerometer events
 	 * @param threshold
 	 * 			minimum acceleration variation for considering shaking
 	 * @param interval
 	 * 			minimum interval between to shake events
 	 */
-	public static void startListening(AccelerometerListener shakeListener, 
+	public static void startListening(
+			AccelerometerListener accelerometerListener, 
 			int threshold, int interval) {
 		configure(threshold, interval);
-		startListening(shakeListener);
+		startListening(accelerometerListener);
 	}
 
 	/**
 	 * The listener that listen to events from the accelerometer listener
 	 */
-	private static SensorEventListener sensorEventListener = new SensorEventListener() {
+	private static SensorEventListener sensorEventListener = 
+		new SensorEventListener() {
 
 		private long now = 0;
 		private long timeDiff = 0;
@@ -156,7 +159,8 @@ public class AccelerometerManager {
     		} else {
     			timeDiff = now - lastUpdate;
     			if (timeDiff > 0) {
-	    			force = Math.abs(x + y + z - lastX - lastY - lastZ) / timeDiff;
+	    			force = Math.abs(x + y + z - lastX - lastY - lastZ) 
+	    						/ timeDiff;
 	    			if (force > threshold) {
 	    				if (now - lastShake >= interval) {
 	    					// trigger shake event
