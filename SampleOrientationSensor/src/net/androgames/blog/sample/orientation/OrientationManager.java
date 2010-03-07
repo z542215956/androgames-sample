@@ -26,6 +26,14 @@ public class OrientationManager {
 	/** indicates whether or not Orientation Sensor is running */
 	private static boolean running = false;
 	
+	/** Sides of the phone */
+	enum Side {
+		TOP,
+		BOTTOM,
+		LEFT,
+		RIGHT;
+	}
+	
 	/**
 	 * Returns true if the manager is listening to orientation changes
 	 */
@@ -66,7 +74,8 @@ public class OrientationManager {
 	/**
 	 * Registers a listener and start listening
 	 */
-	public static void startListening(OrientationListener orientationListener) {
+	public static void startListening(
+			OrientationListener orientationListener) {
 		sensorManager = (SensorManager) Orientation.getContext()
 				.getSystemService(Context.SENSOR_SERVICE);
 		List<Sensor> sensors = sensorManager.getSensorList(
@@ -75,7 +84,7 @@ public class OrientationManager {
 			sensor = sensors.get(0);
 			running = sensorManager.registerListener(
 					sensorEventListener, sensor, 
-					SensorManager.SENSOR_DELAY_GAME);
+					SensorManager.SENSOR_DELAY_NORMAL);
 			listener = orientationListener;
 		}
 	}
@@ -83,16 +92,58 @@ public class OrientationManager {
 	/**
 	 * The listener that listen to events from the orientation listener
 	 */
-	private static SensorEventListener sensorEventListener = new SensorEventListener() {
+	private static SensorEventListener sensorEventListener = 
+		new SensorEventListener() {
+		
+		/** The side that is currently up */
+		private Side currentSide = null;
+		private Side oldSide = null;
+		private float azimuth;
+		private float pitch;
+		private float roll;
 		
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 		
 		public void onSensorChanged(SensorEvent event) {
+			
+			azimuth = event.values[0]; 	// azimuth
+			pitch = event.values[1]; 	// pitch
+			roll = event.values[2];		// roll
+			
+			if (pitch < -45 && pitch > -135) {
+				// top side up
+				currentSide = Side.TOP;
+			} else if (pitch > 45 && pitch < 135) {
+				// bottom side up
+				currentSide = Side.BOTTOM;
+			} else if (roll > 45) {
+				// right side up
+				currentSide = Side.RIGHT;
+			} else if (roll < -45) {
+				// left side up
+				currentSide = Side.LEFT;
+			}
+			
+			if (currentSide != null && !currentSide.equals(oldSide)) {
+				switch (currentSide) {
+					case TOP : 
+						listener.onTopUp();
+						break;
+					case BOTTOM : 
+						listener.onBottomUp();
+						break;
+					case LEFT: 
+						listener.onLeftUp();
+						break;
+					case RIGHT: 
+						listener.onRightUp();
+						break;
+				}
+				oldSide = currentSide;
+			}
+			
 			// forwards orientation to the OrientationListener
-    		listener.onOrientationChanged(
-    				event.values[0], 	// azimuth
-    				event.values[1], 	// pitch
-    				event.values[2]);	// roll
+			listener.onOrientationChanged(azimuth, pitch, roll);
 		}
 		
 	};
