@@ -63,8 +63,7 @@ public class CustomDialogActivity extends Activity {
 					})
 					.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							CustomDialogActivity.this
-							.dismissDialog(CUSTOM_DIALOG);
+							dialog.dismiss();
 						}
 					});
 	            dialog = customBuilder.create();
@@ -72,12 +71,11 @@ public class CustomDialogActivity extends Activity {
 	    	case DEFAULT_DIALOG :
 				AlertDialog.Builder alertBuilder = new
 				AlertDialog.Builder(CustomDialogActivity.this);
-				alertBuilder.setTitle("Custom title")
-					.setMessage("Custom body")
+				alertBuilder.setTitle("Default title")
+					.setMessage("Default body")
 					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							CustomDialogActivity.this
-							.dismissDialog(DEFAULT_DIALOG);
+							dialog.dismiss();
 						}
 					})
 					.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
