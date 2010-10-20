@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+    <LinearLayout
+	    android:orientation="vertical"
+	    android:paddingLeft="6dip"
+	    android:paddingRight="6dip"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+	    
+	    <TextView
+	    	android:text="@string/forName"
+        	android:textAppearance="?android:textAppearanceLarge"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"/>
+    
+    	<EditText 
+    		android:id="@+id/forName"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"/>
+	    
+	    <TextView
+	    	android:text="@string/name"
+        	android:textAppearance="?android:textAppearanceLarge"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"/>
+    
+    	<EditText 
+    		android:id="@+id/name"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"/>
+    
+	    <LinearLayout
+		    android:orientation="horizontal"
+		    android:layout_gravity="right"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    	
+	    	<Button 
+	    		android:id="@+id/insertOrUpdate"
+	    		android:onClick="insertOrUpdate"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"/>
+	    	
+	    	<Button 
+	    		android:id="@+id/delete"
+	    		android:text="@string/delete"
+	    		android:onClick="delete"
+	    		android:visibility="gone"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"/>
+	    	
+	    	<Button 
+	    		android:id="@+id/initialize"
+	    		android:text="@string/initialize"
+	    		android:onClick="initialize"
+	    		android:visibility="gone"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"/>
+			    
+	    </LinearLayout>
+    
+    </LinearLayout>
+		
+	<ListView 
+		android:id="@+id/users"
+		android:layout_height="0dip"
+		android:layout_weight="1"
+		android:layout_width="fill_parent" />
+	    
+</LinearLayout>

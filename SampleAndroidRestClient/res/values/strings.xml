@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RestClient</string>
+    <string name="loading">Chargement en cours...</string>
+    <string name="error">Erreur</string>
+    <string name="error_message">Une erreur s\'est produite lors de la récupération des données sur le serveur distant.</string>
+    <string name="close">Fermer</string>
+    <string name="delete">Supprimer</string>
+    <string name="update">Enregistrer</string>
+    <string name="create">Créer</string>
+    <string name="initialize">Annuler</string>
+    <string name="name">Nom</string>
+    <string name="forName">Prénom</string>
+</resources>
