@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- 
+		Pour accéder au serveur local de votre ordinateur depuis l'émulateur Android,
+		il faut utiliser l'adresse 10.0.2.2
+		En effet localhost ou 127.0.0.1 sont considérés comme les adresses locales de 
+		l'émulateur
+	 -->
+    <string name="user_endpoint">http://10.0.2.2:8888/user</string>
+</resources>
