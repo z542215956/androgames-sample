@@ -92,7 +92,9 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
 				public boolean onPreferenceClick(Preference preference) {
 					Intent intent = new Intent(Intent.ACTION_VIEW);
 					intent.setData(Uri.parse(PUB_APPS));
-					LevelPreferences.this.startActivity(intent);
+					try {
+						LevelPreferences.this.startActivity(intent);
+					} catch (ActivityNotFoundException anfe) {}
 					return true;
 				}
 			});
