@@ -103,13 +103,13 @@ public class Level extends Activity implements OrientationListener {
 	        			.setCancelable(true)
 	        			.setPositiveButton(R.string.calibrate, new DialogInterface.OnClickListener() {
 	        	           	public void onClick(DialogInterface dialog, int id) {
-	        	        	   	Level.this.dismissDialog(DIALOG_CALIBRATE_ID);
+	        	        	   	dialog.dismiss();
 	        	        	   	calibrating = true;
 	        	           	}
 	        			})
 	        	       	.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 	        	           	public void onClick(DialogInterface dialog, int id) {
-	        	        	   	Level.this.dismissDialog(DIALOG_CALIBRATE_ID);
+	        	        	   	dialog.dismiss();
 	        	           	}
 	        	       	})
 	        	       	.setNeutralButton(R.string.reset, new DialogInterface.OnClickListener() {
@@ -152,9 +152,6 @@ public class Level extends Activity implements OrientationListener {
         wakeLock.acquire();
     }
 
-    /**
-     * Invoked when the Activity loses user focus.
-     */
     @Override
     protected void onPause() {
         super.onPause();
