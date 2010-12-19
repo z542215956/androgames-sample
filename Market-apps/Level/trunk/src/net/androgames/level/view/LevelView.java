@@ -67,7 +67,6 @@ public class LevelView extends SurfaceView implements SurfaceHolder.Callback, On
 	    }
     }
 
-    // TODO : voir si on ne met pas juste en pause et vidage dans le finalize...
     public void surfaceDestroyed(SurfaceHolder holder) {
         if (drawer != null) {
         	drawer.pause(true);
