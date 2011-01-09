@@ -4,24 +4,24 @@ import net.androgames.level.R;
 
 public enum Viscosity {
 
-	HIGH(R.string.viscosity_high_summary, R.integer.viscosity_high),
-	MEDIUM(R.string.viscosity_medium_summary, R.integer.viscosity_medium),
-	LOW(R.string.viscosity_low_summary, R.integer.viscosity_low);
+	HIGH(R.string.viscosity_high_summary, 0.5d),
+	MEDIUM(R.string.viscosity_medium_summary, 1d),
+	LOW(R.string.viscosity_low_summary, 1.5d);
 
 	private int summary;
-	private int value;
+	private double coeff;
 	
-	private Viscosity(int summary, int value) {
+	private Viscosity(int summary, double coeff) {
 		this.summary = summary;
-		this.value = value;
+		this.coeff = coeff;
 	}
 	
+	public double getCoeff() {
+		return coeff;
+	}
+
 	public int getSummary() {
 		return summary;
 	}
 
-	public int getValue() {
-		return value;
-	}
-	
 }

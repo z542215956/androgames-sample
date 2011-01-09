@@ -1,10 +1,11 @@
-package net.androgames.level.thread;
+package net.androgames.level.painter;
 
 import java.text.DecimalFormat;
 
 import net.androgames.level.R;
 import net.androgames.level.config.DisplayType;
 import net.androgames.level.config.Provider;
+import net.androgames.level.config.Viscosity;
 import net.androgames.level.orientation.Orientation;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -24,7 +25,7 @@ import android.view.SurfaceHolder;
  * @author antoine vianey
  *
  */
-public class LevelThread implements Runnable {
+public class LevelPainter implements Runnable {
 
     /** Etats du thread */
     private boolean initialized;
@@ -116,7 +117,8 @@ public class LevelThread implements Runnable {
 	private String sensorText;
 	
 	/** Ajustement de la vitesse */
-	private double viscosity;
+	private Viscosity viscosity;
+	private double viscosityValue;
 	
 	/** Format des angles */
 	private DecimalFormat displayFormat;
@@ -146,10 +148,11 @@ public class LevelThread implements Runnable {
 	private final Handler handler;
 	private long frameRate;
 
-    public LevelThread(SurfaceHolder surfaceHolder, Context context, 
+    public LevelPainter(SurfaceHolder surfaceHolder, Context context, 
     		Handler handler, int width, int height,
-    		boolean showAngle, DisplayType angleType, int viscosity, 
-    		boolean lockEnabled, boolean ecoMode, Provider provider) {
+    		boolean showAngle, DisplayType angleType, 
+    		Viscosity viscosity, boolean lockEnabled, 
+    		boolean ecoMode, Provider provider) {
 
     	// get handles to some important objects
         this.surfaceHolder = surfaceHolder;
@@ -169,7 +172,7 @@ public class LevelThread implements Runnable {
         this.display = context.getResources().getDrawable(R.drawable.display);
         
         // vitesse de la bulle
-        this.viscosity = context.getResources().getInteger(viscosity);
+        this.viscosity = viscosity;
         
         // config
         this.showAngle = showAngle;
@@ -331,16 +334,16 @@ public class LevelThread implements Runnable {
 		    	switch (orientation) {
 			    	case TOP : 
 			    	case BOTTOM : 
-			    		speedX = orientation.getReverse() * (angleX - posX) * viscosity;
+			    		speedX = orientation.getReverse() * (angleX - posX) * viscosityValue;
 			    		break;
 			    	case LEFT : 
 			    	case RIGHT : 
-			    		speedX = orientation.getReverse() * (angleY - posX) * viscosity;
+			    		speedX = orientation.getReverse() * (angleY - posX) * viscosityValue;
 			    		break;
 			    	case LANDING : 
 				    	posY = (2 * y - minLevelY - maxLevelY) / levelMinusBubbleHeight;
-			    		speedX = (angleX - posX) * viscosity;
-			    		speedY = (angleY - posY) * viscosity;
+			    		speedX = (angleX - posX) * viscosityValue;
+			    		speedY = (angleY - posY) * viscosityValue;
 				    	y += speedY * timeDiff;
 			    		break;
 		    	}
@@ -553,6 +556,9 @@ public class LevelThread implements Runnable {
 		                levelHeight = (int) (levelWidth * LEVEL_ASPECT_RATIO);
 		            	break;
 	            }
+
+	        	viscosityValue = levelWidth * viscosity.getCoeff();
+	        	
 	            minLevelX = middleX - levelWidth / 2;
 	            maxLevelX = middleX + levelWidth / 2;
 	            minLevelY = middleY - levelHeight / 2;

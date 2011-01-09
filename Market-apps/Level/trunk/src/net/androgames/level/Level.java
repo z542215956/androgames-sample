@@ -34,6 +34,7 @@ import android.widget.Toast;
  * @author antoine vianey
  *
  */
+// TODO : calculer la viscosite au runtime sans avoir a configurer sa valeur
 public class Level extends Activity implements OrientationListener {
 	
 	private static Context CONTEXT;
