@@ -5,6 +5,7 @@ import java.util.List;
 import net.androgames.level.Level;
 import android.content.Context;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
@@ -31,6 +32,15 @@ public abstract class OrientationProvider implements SensorEventListener {
 	/** Calibration */
 	private float calibratedPitch;
 	private float calibratedRoll;
+	
+	/** Screen orientation fix */
+	protected int screenConfig;
+	
+	/** Orientation */
+    protected float pitch;
+    protected float roll;
+    protected float tmp;
+	private Orientation orientation;
  
     /**
      * Returns true if the manager is listening to orientation changes
@@ -82,6 +92,36 @@ public abstract class OrientationProvider implements SensorEventListener {
         }
     }
     
+    protected abstract void handleSensorChanged(SensorEvent event);
+
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+	public void onSensorChanged(SensorEvent event) {
+		handleSensorChanged(event);
+            
+        pitch -= getCalibratedPitch();
+        roll -= getCalibratedRoll();
+ 
+        if (pitch < -45 && pitch > -135) {
+            // top side up
+            orientation = Orientation.TOP;
+        } else if (pitch > 45 && pitch < 135) {
+            // bottom side up
+            orientation = Orientation.BOTTOM;
+        } else if (roll > 45) {
+            // right side up
+            orientation = Orientation.RIGHT;
+        } else if (roll < -45) {
+            // left side up
+            orientation = Orientation.LEFT;
+        } else {
+        	// landing
+        	orientation = Orientation.LANDING;
+        }
+            
+        getListener().onOrientationChanged(orientation, pitch, roll);
+	}
+    
     protected OrientationListener getListener() {
 		return listener;
 	}
@@ -105,6 +145,10 @@ public abstract class OrientationProvider implements SensorEventListener {
 
 	public float getCalibratedRoll() {
 		return calibratedRoll;
+	}
+
+	public void setScreenConfig(int screenConfig) {
+		this.screenConfig = screenConfig;
 	}
 	
 }

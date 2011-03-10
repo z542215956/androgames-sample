@@ -35,4 +35,10 @@
 	    <item>HIGH</item>
 	</string-array>
 
+	<string-array name="configs_name">
+        <item>@string/config_switch_horizontally</item>
+        <item>@string/config_switch_vertically</item>
+        <item>@string/config_rotate_axis</item>
+    </string-array>
+
 </resources>
