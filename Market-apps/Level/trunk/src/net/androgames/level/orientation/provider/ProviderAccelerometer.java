@@ -1,10 +1,8 @@
 package net.androgames.level.orientation.provider;
 
-import net.androgames.level.orientation.Orientation;
 import net.androgames.level.orientation.OrientationProvider;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 
 /**
  * 
@@ -15,17 +13,13 @@ import android.hardware.SensorEventListener;
  * @author antoine vianey
  *
  */
-public class ProviderAccelerometer extends OrientationProvider implements SensorEventListener {
+public class ProviderAccelerometer extends OrientationProvider {
 	
 	private static OrientationProvider provider;
-    
-	private Orientation orientation;
  
     private float x;
     private float y;
-    private float z;
-    private float pitch;
-    private float roll;
+    private float z2;
     private double norm;
 	
 	private ProviderAccelerometer() {}
@@ -37,52 +31,41 @@ public class ProviderAccelerometer extends OrientationProvider implements Sensor
 		return provider;
 	}
  
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {}
- 
-    public void onSensorChanged(SensorEvent event) {
- 
+    protected void handleSensorChanged(SensorEvent event) {
+		// screen orientation fix
+		if (screenConfig > 0) {
+			if ((screenConfig & (1 << 0)) > 0) {
+				// switch vertically
+				event.values[0] = -event.values[0];
+			}
+			if ((screenConfig & (1 << 1)) > 0) {
+				// switch horizontally
+				event.values[1] = -event.values[1];
+			}
+			if ((screenConfig & (1 << 2)) > 0) {
+				// invert X and Y axis
+				tmp = event.values[0];
+				event.values[0] = event.values[1];
+				event.values[1] = tmp;
+			}
+		}
         x = event.values[0];
         y = event.values[1];
-        z = event.values[2];
-            
-            // calcul du pitch
-        norm = Math.sqrt(x*x + z*z);
+        z2 = event.values[2] * event.values[2];
+        // calcul du pitch
+        norm = Math.sqrt(x*x + z2);
         if (norm != 0) {
         	pitch = (float) (- Math.atan2(y, norm) * 180 / Math.PI);
         } else {
         	pitch = 0;
         }
-        
         // calcul du roll
-        norm = Math.sqrt(y*y + z*z);
+        norm = Math.sqrt(y*y + z2);
         if (norm != 0) {
         	roll = (float) (Math.atan2(x, norm) * 180 / Math.PI);
         } else {
         	roll = 0;
         }
-            
-        pitch -= getCalibratedPitch();
-        roll -= getCalibratedRoll();
- 
-        if (pitch < -45 && pitch > -135) {
-            // top side up
-            orientation = Orientation.TOP;
-        } else if (pitch > 45 && pitch < 135) {
-            // bottom side up
-            orientation = Orientation.BOTTOM;
-        } else if (roll > 45) {
-            // right side up
-            orientation = Orientation.RIGHT;
-        } else if (roll < -45) {
-            // left side up
-            orientation = Orientation.LEFT;
-        } else {
-        	// landing
-        	orientation = Orientation.LANDING;
-        }
-        
-        getListener().onOrientationChanged(orientation, pitch, roll);
-        
     }
 
 	@Override

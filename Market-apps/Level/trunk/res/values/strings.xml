@@ -4,11 +4,12 @@
     <string name="reset">Reset</string>
     <string name="not_supported">Orientation not supported</string>
     <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
     <string name="ok">Ok</string>
     <string name="calibrate">Calibrate</string>
     <string name="calibrate_info">press MENU to calibrate...</string>
     <string name="calibrate_title">Calibrate your phone</string>
-    <string name="calibrate_message">Put your Android device on a flat horizontal surface and press the Calibrate button.</string>
+    <string name="calibrate_message">Put the back (not the side) of your Android device on a flat horizontal surface and press the Calibrate button.</string>
     <string name="calibrate_again_title">You must re-calibrate</string>
     <string name="calibrate_again_message">The sensor change requires re-calibration of the phone.</string>
     <string name="calibrate_saved">Custom calibration saved !</string>
@@ -33,6 +34,8 @@
     <string name="preference_viscosity">Viscosity</string>
     <string name="preference_economy">Eco mode</string>
     <string name="preference_economy_summary">Less smooth animations\nbut preserves the battery life</string>
+    <string name="preference_screen_config">Custom screen orientation</string>
+    <string name="preference_screen_config_summary">Only available with the accelerometer orientation sensor</string>
     <string name="angle">Angle</string>
     <string name="lock_info">tap to lock level orientation</string>
     <string name="inclination">Inclination</string>
@@ -53,4 +56,7 @@
     <string name="viscosity_low_summary">Low viscosity\nBubble moves faster</string>
     <string name="viscosity_medium_summary">Medium viscosity\nBubble moves normaly</string>
     <string name="viscosity_high_summary">High viscosity\nBubble moves slowly</string>
+    <string name="config_switch_vertically">Invert vertically</string>
+    <string name="config_switch_horizontally">Invert horizontally</string>
+    <string name="config_rotate_axis">Rotate axis</string>
 </resources>

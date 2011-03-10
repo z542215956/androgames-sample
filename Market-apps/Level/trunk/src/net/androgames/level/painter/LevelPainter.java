@@ -26,6 +26,8 @@ import android.view.SurfaceHolder;
  *
  */
 public class LevelPainter implements Runnable {
+	
+	private static final double PI180 = Math.PI / 180;
 
     /** Etats du thread */
     private boolean initialized;
@@ -638,8 +640,8 @@ public class LevelPainter implements Runnable {
 					angle2 = 100 * angle2 / 45;
 					break;
 				case ROOF_PITCH :
-					angle1 = 12 * (float) Math.tan((angle1 * Math.PI) / 180);
-					angle2 = 12 * (float) Math.tan((angle2 * Math.PI) / 180);
+					angle1 = 12 * (float) Math.tan(angle1 * PI180);
+					angle2 = 12 * (float) Math.tan(angle2 * PI180);
 					break;
 			}
 			// coorection des angles affiches
@@ -649,8 +651,8 @@ public class LevelPainter implements Runnable {
 			if (angle2 > angleType.getMax()) {
 				angle2 = angleType.getMax();
 			}
-	        angleY = Math.sin((newPitch * Math.PI) / 180) / MAX_SINUS;
-	        angleX = Math.sin((newRoll * Math.PI) / 180) / MAX_SINUS;
+	        angleY = Math.sin(newPitch * PI180) / MAX_SINUS;
+	        angleX = Math.sin(newRoll * PI180) / MAX_SINUS;
 	        // correction des angles en mode verouillage
 	        if (lockEnabled && locked) {
 	        	if (angleX > 1) {

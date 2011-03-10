@@ -59,7 +59,8 @@ public class LevelView extends SurfaceView implements SurfaceHolder.Callback, On
 				Viscosity.valueOf(prefs.getString(LevelPreferences.KEY_VISCOSITY, "MEDIUM")),
 				prefs.getBoolean(LevelPreferences.KEY_LOCK, false),
 				prefs.getBoolean(LevelPreferences.KEY_ECONOMY, false),
-				Provider.valueOf(prefs.getString(LevelPreferences.KEY_SENSOR, "ORIENTATION")));
+				Provider.valueOf(prefs.getString(LevelPreferences.KEY_SENSOR, 
+						LevelPreferences.PROVIDER_ORIENTATION)));
 	    }
     }
 

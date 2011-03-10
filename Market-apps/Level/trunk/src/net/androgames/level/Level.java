@@ -34,7 +34,6 @@ import android.widget.Toast;
  * @author antoine vianey
  *
  */
-// TODO : calculer la viscosite au runtime sans avoir a configurer sa valeur
 public class Level extends Activity implements OrientationListener {
 	
 	private static Context CONTEXT;
@@ -132,12 +131,13 @@ public class Level extends Activity implements OrientationListener {
     	super.onResume();
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	provider = Provider.valueOf(
-    			prefs.getString(LevelPreferences.KEY_SENSOR, "ORIENTATION")).getProvider();
+    			prefs.getString(LevelPreferences.KEY_SENSOR, 
+    					LevelPreferences.PROVIDER_ORIENTATION)).getProvider();
     	// chargement des effets sonores
-        soundEnabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(
-        		LevelPreferences.KEY_SOUND, false);
+        soundEnabled = prefs.getBoolean(LevelPreferences.KEY_SOUND, false);
         // orientation manager
     	if (provider.isSupported()) {
+    		provider.setScreenConfig(prefs.getInt(LevelPreferences.KEY_SCREEN_CONFIG, 0));
     		provider.startListening(this);
     		prefs = getPreferences(Context.MODE_PRIVATE);
     		provider.resetCalibration();
