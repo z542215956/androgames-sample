@@ -9,7 +9,7 @@
     <string name="calibrate">Etalonner</string>
     <string name="calibrate_info">appuyez sur MENU pour étalonner...</string>
     <string name="calibrate_title">Etalonnage du téléphone</string>
-    <string name="calibrate_message">Posez votre téléphone Android écran vers le haut sur une surface horizontale plane de référence puis appuyez sur le bouton Etalonner.</string>
+    <string name="calibrate_message">Posez le côté du téléphone que vous souhaitez calibrer sur une surface horizontale et plane de référence puis appuyez sur le bouton Etalonner.\n\nOu réinitialisez l\'étalonnage pour l\'ensemble des côtés du téléphone.</string>
     <string name="calibrate_again_title">Ré-étalonnage requis</string>
     <string name="calibrate_again_message">Changer de senseur nécessite de recalibrer le téléphone.</string>
     <string name="calibrate_saved">Etalonnage sauvegardé !</string>

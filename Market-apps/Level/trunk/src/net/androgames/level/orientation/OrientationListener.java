@@ -13,4 +13,8 @@ public interface OrientationListener {
 
 	public void onOrientationChanged(Orientation orientation, float pitch, float roll);
 	
+	public void onCalibrationSaved(boolean success);
+	
+	public void onCalibrationReset(boolean success);
+	
 }

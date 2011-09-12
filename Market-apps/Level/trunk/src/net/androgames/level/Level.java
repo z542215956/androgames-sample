@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -36,20 +35,14 @@ import android.widget.Toast;
  */
 public class Level extends Activity implements OrientationListener {
 	
-	private static Context CONTEXT;
+	private static Level CONTEXT;
 	
 	private static final int DIALOG_CALIBRATE_ID = 1;
 	private static final int TOAST_DURATION = 10000;
-
-	/** Calibration */
-	// TODO : utiliser les valeurs 1, 2, 3 variables pour les prefs
-	private static final String SAVED_PITCH = "net.androgames.level.pitch";
-	private static final String SAVED_ROLL = "net.androgames.level.roll";
 	
 	private OrientationProvider provider;
 	
     private LevelView view;
-    private boolean calibrating;
     private WakeLock wakeLock;
     
 	/** Gestion du son */
@@ -66,7 +59,6 @@ public class Level extends Activity implements OrientationListener {
         setContentView(R.layout.main);
         CONTEXT = this;
         view = (LevelView) findViewById(R.id.level);
-        calibrating = false;
         // sound
     	soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
     	bipSoundID = soundPool.load(this, R.raw.bip, 1);
@@ -103,19 +95,13 @@ public class Level extends Activity implements OrientationListener {
 	        			.setCancelable(true)
 	        			.setPositiveButton(R.string.calibrate, new DialogInterface.OnClickListener() {
 	        	           	public void onClick(DialogInterface dialog, int id) {
-	        	        	   	dialog.dismiss();
-	        	        	   	calibrating = true;
+	        	        	   	provider.saveCalibration();
 	        	           	}
 	        			})
-	        	       	.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-	        	           	public void onClick(DialogInterface dialog, int id) {
-	        	        	   	dialog.dismiss();
-	        	           	}
-	        	       	})
+	        	       	.setNegativeButton(R.string.cancel, null)
 	        	       	.setNeutralButton(R.string.reset, new DialogInterface.OnClickListener() {
 	        	           	public void onClick(DialogInterface dialog, int id) {
 	        	           		provider.resetCalibration();
-        	           			Level.this.saveCalibration(0, 0, true);
 	        	           	}
 	        	       	})
 	        	       	.setMessage(R.string.calibrate_message);
@@ -139,11 +125,6 @@ public class Level extends Activity implements OrientationListener {
     	if (provider.isSupported()) {
     		provider.setScreenConfig(prefs.getInt(LevelPreferences.KEY_SCREEN_CONFIG, 0));
     		provider.startListening(this);
-    		prefs = getPreferences(Context.MODE_PRIVATE);
-    		provider.resetCalibration();
-    		provider.setCalibration(
-				prefs.getFloat(SAVED_PITCH, 0), 
-				prefs.getFloat(SAVED_ROLL, 0));
     	} else {
     		Toast.makeText(this, getText(R.string.not_supported), TOAST_DURATION).show();
     	}
@@ -172,10 +153,6 @@ public class Level extends Activity implements OrientationListener {
 
 	@Override
 	public void onOrientationChanged(Orientation orientation, float pitch, float roll) {
-		if (calibrating) {
-			calibrating = false;
-			saveCalibration(pitch, roll, false);
-		}
 		if (soundEnabled && orientation.isLevel(pitch, roll)
 				&& System.currentTimeMillis() - lastBip > bipRate) {
 			AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -187,25 +164,27 @@ public class Level extends Activity implements OrientationListener {
 		}
 		view.onOrientationChanged(orientation, pitch, roll);
 	}
-	
-	private void saveCalibration(float pitch, float roll, boolean reset) {
-		Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
-		editor.putFloat(SAVED_PITCH, pitch);
-		editor.putFloat(SAVED_ROLL, roll);
-		int id = R.string.calibrate_failed;
-		if (editor.commit()) {
-			provider.setCalibration(pitch, roll);
-			if (reset) {
-				id = R.string.calibrate_restored;
-			} else {
-				id = R.string.calibrate_saved;
-			}
-		}
-		Toast.makeText(this, id, TOAST_DURATION).show();
+
+	@Override
+	public void onCalibrationReset(boolean success) {
+		Toast.makeText(this, success ? 
+				R.string.calibrate_restored : R.string.calibrate_failed, 
+				Level.TOAST_DURATION).show();
 	}
 
-    public static Context getContext() {
+	@Override
+	public void onCalibrationSaved(boolean success) {
+		Toast.makeText(this, success ? 
+				R.string.calibrate_saved : R.string.calibrate_failed,
+				Level.TOAST_DURATION).show();
+	}
+
+    public static Level getContext() {
 		return CONTEXT;
 	}
+    
+    public static OrientationProvider getProvider() {
+    	return getContext().provider;
+    }
     
 }

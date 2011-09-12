@@ -2,6 +2,7 @@ package net.androgames.level.painter;
 
 import java.text.DecimalFormat;
 
+import net.androgames.level.Level;
 import net.androgames.level.R;
 import net.androgames.level.config.DisplayType;
 import net.androgames.level.config.Provider;
@@ -644,7 +645,7 @@ public class LevelPainter implements Runnable {
 					angle2 = 12 * (float) Math.tan(angle2 * PI180);
 					break;
 			}
-			// coorection des angles affiches
+			// correction des angles affiches
 			if (angle1 > angleType.getMax()) {
 				angle1 = angleType.getMax();
 			}
@@ -653,19 +654,18 @@ public class LevelPainter implements Runnable {
 			}
 	        angleY = Math.sin(newPitch * PI180) / MAX_SINUS;
 	        angleX = Math.sin(newRoll * PI180) / MAX_SINUS;
-	        // correction des angles en mode verouillage
-	        if (lockEnabled && locked) {
-	        	if (angleX > 1) {
-	        		angleX = 1;
-	        	} else if (angleX < -1) {
-	        		angleX = -1;
-	        	}
-	        	if (angleY > 1) {
-	        		angleY = 1;
-	        	} else if (angleY < -1) {
-	        		angleY = -1;
-	        	}
-	        }
+	        // correction des angles aberrants
+	        // pour ne pas que la bulle sorte de l'ecran
+        	if (angleX > 1) {
+        		angleX = 1;
+        	} else if (angleX < -1) {
+        		angleX = -1;
+        	}
+        	if (angleY > 1) {
+        		angleY = 1;
+        	} else if (angleY < -1) {
+        		angleY = -1;
+        	}
 	        // correction des angles a plat
 	        // la bulle ne doit pas sortir du niveau
 	        if (orientation.equals(Orientation.LANDING) && angleX != 0 && angleY != 0) {
@@ -693,6 +693,7 @@ public class LevelPainter implements Runnable {
 				|| (orientation == Orientation.LEFT 
 					&& lockRect.contains(middleX - (middleY - touchY), canvasHeight - (middleY - (touchX - middleX))))) {
 				locked = !locked;
+				Level.getProvider().setLocked(locked);
 			}
 		}
 	}

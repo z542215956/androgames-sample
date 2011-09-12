@@ -9,7 +9,7 @@
     <string name="calibrate">Calibrar</string>
     <string name="calibrate_info">Clique em MENU para calibrar...</string>
     <string name="calibrate_title">Calibrar o telefone</string>
-    <string name="calibrate_message">Coloque o seu dispositivo Android numa superficie plana horizontal e clique em Calibrar.</string>
+    <string name="calibrate_message">Coloque o lado do telefone que deseja calibrar em uma superfície plana horizontal e clique em Calibrar.</string>
     <string name="calibrate_again_title">Precisa de recalibrar</string>
     <string name="calibrate_again_message">A alteração do sensor precisa de nova calibragem.</string>
     <string name="calibrate_saved">A calibragem foi guardada !</string>
