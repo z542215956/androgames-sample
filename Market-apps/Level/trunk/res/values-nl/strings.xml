@@ -16,9 +16,6 @@
     <string name="calibrate_failed">Calibratie mislukt !</string>
     <string name="calibrate_restored">Oorspronkelijke calibratie hersteld !</string>
     <string name="preferences">Opties</string>
-    <string name="preference">Bubble opties</string>
-    <string name="preference_display_category">Weergave</string>
-    <string name="preference_config_category">Technische configuratie</string>
     <string name="preference_apps_category">Mijn werk</string>
     <string name="preference_apps">Mijn applicaties</string>
     <string name="preference_apps_summary">Bekijk mijn andere Android applicaties</string>
@@ -34,8 +31,6 @@
     <string name="preference_viscosity">Viscositeit</string>
     <string name="preference_economy">Besparings-mode</string>
     <string name="preference_economy_summary">Minder vlotte animaties\nmaar langere batterij-duur</string>
-    <string name="preference_screen_config">Aangepaste oriëntatie</string>
-    <string name="preference_screen_config_summary">Alleen beschikbaar met de G-sensor</string>
     <string name="angle">Hoek</string>
     <string name="lock_info">tik hier om de hoek te vergrendelan</string>
     <string name="inclination">Helling</string>

@@ -18,10 +18,10 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.Toast;
 
 /**
@@ -55,7 +55,6 @@ public class Level extends Activity implements OrientationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
         CONTEXT = this;
         view = (LevelView) findViewById(R.id.level);
@@ -115,15 +114,15 @@ public class Level extends Activity implements OrientationListener {
     
     protected void onResume() {
     	super.onResume();
+    	Log.d("Level", "Level resumed");
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	provider = Provider.valueOf(
     			prefs.getString(LevelPreferences.KEY_SENSOR, 
-    					LevelPreferences.PROVIDER_ORIENTATION)).getProvider();
+    					LevelPreferences.PROVIDER_ACCELEROMETER)).getProvider();
     	// chargement des effets sonores
         soundEnabled = prefs.getBoolean(LevelPreferences.KEY_SOUND, false);
         // orientation manager
-    	if (provider.isSupported()) {
-    		provider.setScreenConfig(prefs.getInt(LevelPreferences.KEY_SCREEN_CONFIG, 0));
+        if (provider.isSupported()) {
     		provider.startListening(this);
     	} else {
     		Toast.makeText(this, getText(R.string.not_supported), TOAST_DURATION).show();
@@ -153,7 +152,7 @@ public class Level extends Activity implements OrientationListener {
 
 	@Override
 	public void onOrientationChanged(Orientation orientation, float pitch, float roll) {
-		if (soundEnabled && orientation.isLevel(pitch, roll)
+		if (soundEnabled && orientation.isLevel(pitch, roll, 0.1f)
 				&& System.currentTimeMillis() - lastBip > bipRate) {
 			AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 			float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_RING);

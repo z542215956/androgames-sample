@@ -16,9 +16,6 @@
     <string name="calibrate_failed">Error de calibración !</string>
     <string name="calibrate_restored">Calibración original restaurada !</string>
     <string name="preferences">Preferencias</string>
-    <string name="preference">Nivel Preferencias</string>
-    <string name="preference_display_category">Apariencia</string>
-    <string name="preference_config_category">Configuración técnica</string>
     <string name="preference_apps_category">Mi trabajo</string>
     <string name="preference_apps">Mis aplicaciones</string>
     <string name="preference_apps_summary">Mis otras Android aplicaciones</string>
@@ -34,8 +31,6 @@
     <string name="preference_viscosity">Viscosidad</string>
     <string name="preference_economy">Modo económico</string>
     <string name="preference_economy_summary">Animaciones menos fluidas\npero conserva la pila</string>
-    <string name="preference_screen_config">Personalizada orientación</string>
-    <string name="preference_screen_config_summary">Sólo disponible con la el acelerómetro sensor</string>
     <string name="angle">Angulo</string>
     <string name="lock_info">hundir para conservar la orientación</string>
     <string name="inclination">Inclinación</string>

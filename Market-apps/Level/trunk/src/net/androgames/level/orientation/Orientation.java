@@ -33,16 +33,21 @@ public enum Orientation {
 		this.rotation = rotation;
 	}
 	
-	public boolean isLevel(float pitch, float roll) {
+	public boolean isLevel(float pitch, float roll, float sensibility) {
 		switch (this) {
 			case BOTTOM :
 			case TOP :
-				return roll < 0.1 && roll > - 0.1;
+				return roll < sensibility 
+						&& roll > - sensibility;
 			case LANDING :
-				return roll < 0.1 && roll > - 0.1 && (Math.abs(pitch) < 0.1 || Math.abs(pitch) > 179.9);
+				return roll < sensibility 
+						&& roll > - sensibility 
+						&& (Math.abs(pitch) < sensibility 
+								|| Math.abs(pitch) > 180 - sensibility);
 			case LEFT :
 			case RIGHT :
-				return Math.abs(pitch) < 0.1 || Math.abs(pitch) > 179.9;
+				return Math.abs(pitch) < sensibility 
+						|| Math.abs(pitch) > 180 - sensibility;
 		}
 		return false;
 	}
