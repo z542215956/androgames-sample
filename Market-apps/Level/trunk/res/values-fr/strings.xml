@@ -16,9 +16,6 @@
     <string name="calibrate_failed">L\'étalonnage a échoué !</string>
     <string name="calibrate_restored">Etalonnage d\'usine restauré !</string>
     <string name="preferences">Préférences</string>
-    <string name="preference">Préférences du niveau</string>
-    <string name="preference_display_category">Affichage</string>
-    <string name="preference_config_category">Paramètres techniques</string>
     <string name="preference_apps_category">Mon travail</string>
     <string name="preference_apps">Mes applications</string>
     <string name="preference_apps_summary">Jettez un oeil à mes autres applis</string>
@@ -34,8 +31,6 @@
     <string name="preference_viscosity">Viscosité</string>
     <string name="preference_economy">Mode économique</string>
     <string name="preference_economy_summary">Animations moins fluides\nmais préserve la batterie</string>
-    <string name="preference_screen_config">Personnaliser l\'orientation</string>
-    <string name="preference_screen_config_summary">Disponible uniquement avec\nle senseur d\'accélération</string>
     <string name="angle">Angle</string>
     <string name="lock_info">appuyer pour verrouiller l\'orientation</string>
     <string name="inclination">Pente</string>

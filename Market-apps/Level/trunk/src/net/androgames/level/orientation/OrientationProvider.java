@@ -22,7 +22,6 @@ import android.hardware.SensorManager;
  * @author antoine vianey
  *
  */
-// TODO : lock orientation in provider!!!
 public abstract class OrientationProvider implements SensorEventListener {
 
 	/** Calibration */
@@ -32,9 +31,10 @@ public abstract class OrientationProvider implements SensorEventListener {
     private Sensor sensor;
     private SensorManager sensorManager;
 	private OrientationListener listener;
- 
+
     /** indicates whether or not Accelerometer Sensor is supported */
     private Boolean supported;
+    
     /** indicates whether or not Accelerometer Sensor is running */
     private boolean running = false;
 
@@ -43,17 +43,19 @@ public abstract class OrientationProvider implements SensorEventListener {
 	private float[] calibratedRoll = new float[5];
 	private boolean calibrating = false;
 	
-	/** Screen orientation fix */
-	protected int screenConfig;
-	
 	/** Orientation */
     protected float pitch;
     protected float roll;
     protected float tmp;
 	private Orientation orientation;
 	private boolean locked;
+	protected int displayOrientation;
  
-    /**
+    protected OrientationProvider() {
+		this.displayOrientation = Level.getContext().getWindowManager().getDefaultDisplay().getOrientation();
+	}
+
+	/**
      * Returns true if the manager is listening to orientation changes
      */
     public boolean isListening() {
@@ -71,9 +73,9 @@ public abstract class OrientationProvider implements SensorEventListener {
             }
         } catch (Exception e) {}
     }
- 
+
     protected abstract int getSensorType();
-    
+
     /**
      * Returns true if at least one Accelerometer sensor is available
      */
@@ -87,7 +89,7 @@ public abstract class OrientationProvider implements SensorEventListener {
         }
         return false;
     }
- 
+    
     /**
      * Registers a listener and start listening
      * @param accelerometerListener
@@ -115,8 +117,6 @@ public abstract class OrientationProvider implements SensorEventListener {
             listener = orientationListener;
         }
     }
-    
-    protected abstract void handleSensorChanged(SensorEvent event);
 
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
@@ -159,22 +159,30 @@ public abstract class OrientationProvider implements SensorEventListener {
 	        pitch -= calibratedPitch[orientation.ordinal()];
 	        roll -= calibratedRoll[orientation.ordinal()];
 		}
-            
+
+		// propagation of the orientation
         listener.onOrientationChanged(orientation, pitch, roll);
 	}
     
+	protected abstract void handleSensorChanged(SensorEvent event);
+
 	/**
 	 * Tell the provider to restore the calibration
 	 * to the default factory values
 	 */
 	public final void resetCalibration() {
-		final boolean success = Level.getContext().getPreferences(
-				Context.MODE_PRIVATE).edit().clear().commit();
+		boolean success = false;
+		try {
+			success = Level.getContext().getPreferences(
+					Context.MODE_PRIVATE).edit().clear().commit();
+		} catch (Exception e) {}
 		if (success) {
 			Arrays.fill(calibratedPitch, 0);
 			Arrays.fill(calibratedRoll, 0);
 		}
-		listener.onCalibrationReset(success);
+		if (listener != null) {
+			listener.onCalibrationReset(success);
+		}
 	}
     
 	/**
@@ -184,10 +192,6 @@ public abstract class OrientationProvider implements SensorEventListener {
 	 */
 	public final void saveCalibration() {
 		calibrating = true;
-	}
-
-	public void setScreenConfig(int screenConfig) {
-		this.screenConfig = screenConfig;
 	}
 	
 	public void setLocked(boolean locked) {

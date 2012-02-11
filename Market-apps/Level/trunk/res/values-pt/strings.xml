@@ -16,9 +16,6 @@
     <string name="calibrate_failed">A calibragem falhou !</string>
     <string name="calibrate_restored">Calibragem de origem aplicada!</string>
     <string name="preferences">Opções</string>
-    <string name="preference">Opções do Bubble</string>
-    <string name="preference_display_category">Visor</string>
-    <string name="preference_config_category">Configuração técnica</string>
     <string name="preference_apps_category">Relacionado</string>
     <string name="preference_apps">Aplicações do Autor</string>
     <string name="preference_apps_summary">Ver as minhas outras aplicações para Android</string>
@@ -34,8 +31,6 @@
     <string name="preference_viscosity">Viscosidade</string>
     <string name="preference_economy">Modo Económico</string>
     <string name="preference_economy_summary">Menos qualidade nas animações\npreservando mais a vida da bateria.</string>
-    <string name="preference_screen_config">Personalizar a orientação</string>
-    <string name="preference_screen_config_summary">Apenas disponível com do acelerômetro sensor</string>
     <string name="angle">Ângulo</string>
     <string name="lock_info">Clicar para bloquear neste sensor</string>
     <string name="inclination">Inclinação</string>

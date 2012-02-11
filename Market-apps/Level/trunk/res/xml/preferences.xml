@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<PreferenceCategory android:title="@string/preference_display_category">
+	<PreferenceCategory android:title="@string/preferences">
 		
 		<CheckBoxPreference
 			android:key="preference_show_angle"
@@ -35,30 +35,20 @@
 		    android:entryValues="@array/viscosities"
 		    android:entries="@array/viscosities_name"
 		    android:title="@string/preference_viscosity" />
-	    
-	</PreferenceCategory>
-	
-	<PreferenceCategory android:title="@string/preference_config_category">
+		
+	    <ListPreference 
+		    android:key="preference_sensor"
+		    android:defaultValue="ACCELEROMETER"
+		    android:entryValues="@array/orientations"
+		    android:entries="@array/orientations_name"
+		    android:title="@string/preference_sensor" />
 		
 		<CheckBoxPreference
 			android:key="preference_sound"
 			android:defaultValue="false"
 			android:title="@string/preference_sound"
 			android:summary="@string/preference_sound_summary"/>
-	
-	    <ListPreference 
-		    android:key="preference_sensor"
-		    android:defaultValue="ORIENTATION"
-		    android:entryValues="@array/orientations"
-		    android:entries="@array/orientations_name"
-		    android:title="@string/preference_sensor" />
-	
-	    <Preference 
-		    android:key="preference_screen_config"
-		    android:defaultValue="DEFAULT"
-		    android:title="@string/preference_screen_config"
-		    android:summary="@string/preference_screen_config_summary" />
-	
+	    
 	</PreferenceCategory>
 	
 </PreferenceScreen>

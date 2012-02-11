@@ -16,9 +16,6 @@
     <string name="calibrate_failed">Kalibrierung fehlgeschlagen!</string>
     <string name="calibrate_restored">Originale Kalibrierung wiederhergestellt!</string>
     <string name="preferences">Einstellungen</string>
-    <string name="preference">Bubble Einstellungen</string>
-    <string name="preference_display_category">Anzeige</string>
-    <string name="preference_config_category">Technische Einstellungen</string>
     <string name="preference_apps_category">Meine Arbeit</string>
     <string name="preference_apps">Meine Anwendungen</string>
     <string name="preference_apps_summary">Schau dir meine weiteren Android Apps an</string>
@@ -34,8 +31,6 @@
     <string name="preference_viscosity">Viskosität</string>
     <string name="preference_economy">Strom sparen</string>
     <string name="preference_economy_summary">Weniger ruhige Animationen,\naber der Akku wird geschont</string>
-    <string name="preference_screen_config">Ausrichtung des Bildschirms</string>
-    <string name="preference_screen_config_summary">Nur mit dem Beschleunigungsmesser Bildausrichtungssensor</string>
     <string name="angle">Winkel</string>
     <string name="lock_info">Berühren um die Ausrichtung zu sperren</string>
     <string name="inclination">Steigung</string>

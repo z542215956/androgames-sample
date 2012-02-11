@@ -4,11 +4,13 @@
     <item
     	android:id="@+id/calibrate"
     	android:icon="@android:drawable/ic_menu_mylocation"
-        android:title="@string/calibrate" />
+        android:title="@string/calibrate"
+        android:showAsAction="never" />
 
     <item
     	android:id="@+id/preferences"
     	android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/preferences" />
+        android:title="@string/preferences"
+        android:showAsAction="always" />
         
 </menu>
