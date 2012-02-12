@@ -37,17 +37,17 @@ public enum Orientation {
 		switch (this) {
 			case BOTTOM :
 			case TOP :
-				return roll < sensibility 
-						&& roll > - sensibility;
+				return roll <= sensibility 
+						&& roll >= - sensibility;
 			case LANDING :
-				return roll < sensibility 
-						&& roll > - sensibility 
-						&& (Math.abs(pitch) < sensibility 
-								|| Math.abs(pitch) > 180 - sensibility);
+				return roll <= sensibility 
+						&& roll >= - sensibility 
+						&& (Math.abs(pitch) <= sensibility 
+								|| Math.abs(pitch) >= 180 - sensibility);
 			case LEFT :
 			case RIGHT :
-				return Math.abs(pitch) < sensibility 
-						|| Math.abs(pitch) > 180 - sensibility;
+				return Math.abs(pitch) <= sensibility 
+						|| Math.abs(pitch) >= 180 - sensibility;
 		}
 		return false;
 	}
