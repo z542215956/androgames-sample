@@ -3,7 +3,6 @@ package net.androgames.level.orientation.provider;
 import net.androgames.level.orientation.OrientationProvider;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-import android.hardware.SensorManager;
 import android.view.Surface;
 
 /**

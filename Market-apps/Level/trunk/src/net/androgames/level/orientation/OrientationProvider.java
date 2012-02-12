@@ -23,6 +23,8 @@ import android.hardware.SensorManager;
  *
  */
 public abstract class OrientationProvider implements SensorEventListener {
+	
+	private static final int MIN_VALUES = 20;
 
 	/** Calibration */
 	private static final String SAVED_PITCH = "net.androgames.level.pitch.";
@@ -47,6 +49,10 @@ public abstract class OrientationProvider implements SensorEventListener {
     protected float pitch;
     protected float roll;
     protected float tmp;
+    private float oldPitch;
+    private float oldRoll;
+    private float minStep = 360;
+    private float refValues = 0;
 	private Orientation orientation;
 	private boolean locked;
 	protected int displayOrientation;
@@ -121,8 +127,25 @@ public abstract class OrientationProvider implements SensorEventListener {
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
 	public void onSensorChanged(SensorEvent event) {
+		
+		oldPitch = pitch;
+		oldRoll = roll;
+		
 		handleSensorChanged(event);
- 
+
+		// calculating minimal sensor step
+		if (oldRoll != roll || oldRoll != roll) {
+			if (oldPitch != pitch) {
+				minStep = Math.min(minStep, Math.abs(pitch - oldPitch));
+			}
+			if (oldRoll != roll) {
+				minStep = Math.min(minStep, Math.abs(roll - oldRoll));
+			}
+			if (refValues < MIN_VALUES) {
+				refValues++;
+			}
+		}
+		
 		if (!locked || orientation == null) {
 	        if (pitch < -45 && pitch > -135) {
 	            // top side up
@@ -196,6 +219,20 @@ public abstract class OrientationProvider implements SensorEventListener {
 	
 	public void setLocked(boolean locked) {
 		this.locked = locked;
+	}
+
+	/**
+	 * Return the minimal sensor step
+	 * @return
+	 * 		the minimal sensor step
+	 * 		0 if not yet known
+	 */
+	public float getSensibility() {
+		if (refValues >= MIN_VALUES) {
+			return minStep;
+		} else {
+			return 0;
+		}
 	}
 	
 }
