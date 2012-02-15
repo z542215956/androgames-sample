@@ -18,6 +18,8 @@ public class ProviderOrientation extends OrientationProvider {
 	
 	private static OrientationProvider provider;
 	
+	private float tmp;
+	
 	private ProviderOrientation() {
 		super();
 	}
@@ -32,25 +34,26 @@ public class ProviderOrientation extends OrientationProvider {
 	protected void handleSensorChanged(SensorEvent event) {
         pitch = event.values[1];
         roll = event.values[2];
-        
-        /*
-        Pitch, rotation around x-axis (-180 to 180), with positive values when the z-axis moves toward the y-axis.
-		Roll, rotation around y-axis (-90 to 90), with positive values when the x-axis moves toward the z-axis. 
-        */
-        
+
 	    switch (displayOrientation) {
 	    case Surface.ROTATION_270:
-	    	pitch = roll;
-	    	roll = - pitch;
+	    	pitch = - pitch;
+	    	roll = - roll;
+	    case Surface.ROTATION_90:
+	    	tmp = pitch;
+	    	pitch = - roll;
+	    	roll = tmp;
+	    	if (roll > 90) {
+	    		roll = 180 - roll;
+	    		pitch = - pitch - 180;
+	    	} else if (roll < -90) {
+	    		roll = - roll - 180;
+	    		pitch = 180 - pitch;
+	    	}
 	    	break;
 	    case Surface.ROTATION_180:
 	    	pitch = - pitch;
 	    	roll = - roll;
-	    	break;
-	    case Surface.ROTATION_90:
-	    	pitch = - roll;
-	    	roll = pitch;
-	    	break;
 	    case Surface.ROTATION_0:
     	default:
 	    	break;
