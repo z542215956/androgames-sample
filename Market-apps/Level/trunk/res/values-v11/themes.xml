@@ -5,5 +5,9 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <style name="Level.NoTitle" parent="@style/Level">
+        <item name="android:windowNoTitle">false</item>
+    </style>
     
 </resources>
