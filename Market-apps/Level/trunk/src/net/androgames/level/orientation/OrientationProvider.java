@@ -134,7 +134,7 @@ public abstract class OrientationProvider implements SensorEventListener {
 		handleSensorChanged(event);
 
 		// calculating minimal sensor step
-		if (oldRoll != roll || oldRoll != roll) {
+		if (oldRoll != roll || oldPitch != pitch) {
 			if (oldPitch != pitch) {
 				minStep = Math.min(minStep, Math.abs(pitch - oldPitch));
 			}
